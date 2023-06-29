@@ -25,5 +25,15 @@ return require('packer').startup(function(use)
   -- Fugitive
   use { 'tpope/vim-fugitive' }
 
+  -----------------------------------------------
+  --------- File and Project Management  --------
+  -----------------------------------------------
+  
+  use {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require("nvim-tree").setup()
+    end
+  }
 
 end)
