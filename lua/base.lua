@@ -69,7 +69,5 @@ opt.spell = false
 opt.spelllang = "en_us,es_es"
 -- Use clipboard instead of '+' and '*'
 opt.clipboard = "unnamedplus"
--- Python interpreter
-g.python3_host_prog = "/bin/python"
 -- Auto cd into file
 opt.autochdir = true

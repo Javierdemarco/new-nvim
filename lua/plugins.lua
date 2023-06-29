@@ -1,3 +1,4 @@
+
 return require('packer').startup(function(use)
   -- Packer
   use { "wbthomason/packer.nvim" }
@@ -13,18 +14,15 @@ return require('packer').startup(function(use)
   -----------------------------------------------
   -----------------  GIT  ----------------------
   -----------------------------------------------
-
   -- Lazygit inside vim
   use {
     'kdheepak/lazygit.nvim',
   }
-
   -- Neogit
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-
   -- Fugitive
   use { 'tpope/vim-fugitive' }
-  
+
   -----------------------------------------------
   -----------------  LSP  ----------------------
   -----------------------------------------------
@@ -35,6 +33,7 @@ return require('packer').startup(function(use)
       require("mason").setup()
     end
   }
+  -- Mason Lsp Config
   use {
     "williamboman/mason-lspconfig.nvim",
     config = function()
@@ -47,17 +46,20 @@ return require('packer').startup(function(use)
     end
 
   }
+  -- Nvim Lsp Config
   use {
     "neovim/nvim-lspconfig",
   }
-use {'echasnovski/mini.completion',
-config = function()
-  require('mini.completion').setup()
-end
-}
-use{
-	"L3MON4D3/LuaSnip",
-}
+  -- Mini Completion
+  use {'echasnovski/mini.completion',
+    config = function()
+      require('mini.completion').setup()
+    end
+  }
+  -- Snippets
+  use {
+    "L3MON4D3/LuaSnip",
+  }
   --use 'ms-jpq/coq_nvim'
 
   -----------------------------------------------
@@ -86,11 +88,11 @@ use{
     end
   }
   -- Projections Workspaces
-  use({
+  use {
     "gnikdroy/projections.nvim",
     config = function()
         require("projections").setup({})
     end
-})
+  }
 
 end)
