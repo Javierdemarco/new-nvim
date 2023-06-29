@@ -5,3 +5,5 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<F5>", ":PackerSync<CR>")
+map("n", "<F4>", ":LazyGit<CR>")
+map("n", "<F6>", ":NvimTreeToggle<CR>")
