@@ -28,12 +28,34 @@ return require('packer').startup(function(use)
   -----------------------------------------------
   --------- File and Project Management  --------
   -----------------------------------------------
-  
+  -- Nvim Tree File Manager
   use {
     'nvim-tree/nvim-tree.lua',
     config = function()
       require("nvim-tree").setup()
     end
   }
+  -- Project Manager
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
+        update_focused_file = {
+          enable = true,
+          update_root = true
+        },
+        show_hidden = true,
+      }
+    end
+  }
+  -- Projections Workspaces
+  use({
+    "gnikdroy/projections.nvim",
+    config = function()
+        require("projections").setup({})
+    end
+})
 
 end)
