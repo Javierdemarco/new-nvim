@@ -1,4 +1,3 @@
-
 return require('packer').startup(function(use)
   -- Packer
   use { "wbthomason/packer.nvim" }
@@ -26,41 +25,9 @@ return require('packer').startup(function(use)
   -----------------------------------------------
   -----------------  LSP  ----------------------
   -----------------------------------------------
-  -- LSP Installer Mason
-  use {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end
-  }
-  -- Mason Lsp Config
-  use {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup()
-      require("mason-lspconfig").setup_handlers {
-        function (server_name)
-          require('lspconfig')[server_name].setup {}
-        end
-      }
-    end
+  use { 'neoclide/coc.nvim',
 
-  }
-  -- Nvim Lsp Config
-  use {
-    "neovim/nvim-lspconfig",
-  }
-  -- Mini Completion
-  use {'echasnovski/mini.completion',
-    config = function()
-      require('mini.completion').setup()
-    end
-  }
-  -- Snippets
-  use {
-    "L3MON4D3/LuaSnip",
-  }
-  --use 'ms-jpq/coq_nvim'
+    branch = 'release' }
 
   -----------------------------------------------
   --------- File and Project Management  --------
@@ -91,8 +58,7 @@ return require('packer').startup(function(use)
   use {
     "gnikdroy/projections.nvim",
     config = function()
-        require("projections").setup({})
+      require("projections").setup({})
     end
   }
-
 end)
