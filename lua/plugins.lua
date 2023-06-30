@@ -2,14 +2,28 @@ return require('packer').startup(function(use)
   -- Packer
   use { "wbthomason/packer.nvim" }
 
+  -----------------------------------------------
+  --------------  Appearance  -------------------
+  -----------------------------------------------
+  -- Icons
+  use 'nvim-tree/nvim-web-devicons'
+  -- Status line
+  use { 'freddiehaddad/feline.nvim',
+    config = function()
+      require('config.statusline').setup()
+      --require('feline').setup()
+    end
+  }
   -- Colorschemes
   use {
     'navarasu/onedark.nvim',
     config = function()
+      require('onedark').setup {
+        style = 'dark'
+      }
       require('onedark').load()
     end
   }
-
   -----------------------------------------------
   -----------------  GIT  ----------------------
   -----------------------------------------------
@@ -21,14 +35,20 @@ return require('packer').startup(function(use)
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   -- Fugitive
   use { 'tpope/vim-fugitive' }
-
+  -- GitSigns
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
   -----------------------------------------------
   -----------------  LSP  ----------------------
   -----------------------------------------------
+  -- Completion
   use { 'neoclide/coc.nvim',
 
     branch = 'release' }
-
   -----------------------------------------------
   --------- File and Project Management  --------
   -----------------------------------------------
@@ -61,7 +81,6 @@ return require('packer').startup(function(use)
       require("projections").setup({})
     end
   }
-
   -----------------------------------------------
   --------------------- FZZ  --------------------
   -----------------------------------------------
