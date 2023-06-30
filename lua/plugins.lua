@@ -61,4 +61,13 @@ return require('packer').startup(function(use)
       require("projections").setup({})
     end
   }
+
+  -----------------------------------------------
+  --------------------- FZZ  --------------------
+  -----------------------------------------------
+  -- Telescope
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { { 'nvim-lua/plenary.nvim' } }
+  }
 end)
