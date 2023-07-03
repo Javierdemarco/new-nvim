@@ -7,4 +7,6 @@ end
 map("n", "<F2>", ":Telescope<CR>")
 map("n", "<F4>", ":LazyGit<CR>")
 map("n", "<F5>", ":PackerSync<CR>")
+map("n", "S-<F5>", ":luafile $MYVIMRC<CR>")
 map("n", "<F6>", ":NvimTreeToggle<CR>")
+map("n", "<F7>", ":ToggleTerm<CR>")
