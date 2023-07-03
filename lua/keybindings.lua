@@ -7,6 +7,10 @@ end
 map("n", "<F2>", ":Telescope<CR>")
 map("n", "<F4>", ":LazyGit<CR>")
 map("n", "<F5>", ":PackerSync<CR>")
-map("n", "S-<F5>", ":luafile $MYVIMRC<CR>")
+map("n", "C-<F5>", ":luafile %<CR>")
 map("n", "<F6>", ":NvimTreeToggle<CR>")
 map("n", "<F7>", ":ToggleTerm<CR>")
+
+-- Navigate buffers
+map("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
+map("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
