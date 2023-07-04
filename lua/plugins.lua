@@ -12,13 +12,13 @@ return require('packer').startup(function(use)
     end
   }
   -- Winbar
-  use {
-    "SmiteshP/nvim-navic",
-    requires = "neovim/nvim-lspconfig",
-    config = function()
-      require('config.winbar').setup()    
-    end 
-  }
+  -- use {
+  --   "SmiteshP/nvim-navic",
+  --   requires = "neovim/nvim-lspconfig",
+  --   config = function()
+  --     require('config.winbar').setup()    
+  --   end 
+  -- }
   -- Colorscheme OneDark
   use {
     'navarasu/onedark.nvim',
@@ -33,8 +33,8 @@ return require('packer').startup(function(use)
   use {
     'kdheepak/lazygit.nvim',
     config = function()
-      vim.g.lazygit_use_custom_config_file_path = 1 -- config file path is evaluated if this value is 1
-      vim.g.lazygit_config_file_path = vim.fn.stdpath("config")..'/lua/config/lazygit.yaml' -- custom config file path
+      vim.g.lazygit_use_custom_config_file_path = 1 
+      vim.g.lazygit_config_file_path = vim.fn.stdpath("config")..'/lua/config/lazygit.yaml' 
     end
   }
   -- GitSigns in gutter
@@ -47,14 +47,19 @@ return require('packer').startup(function(use)
   -- Mason
   use {
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason").setup()
+    end,
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+  }
+  -- Mason Lsp Config
+  use {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {"tsserver"},
       })
-    end,
-    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    end
   }
   -- Nvim Lsp Config
   use {
@@ -91,6 +96,7 @@ return require('packer').startup(function(use)
   -- Projections Workspaces
   use {
     "gnikdroy/projections.nvim",
+    branch = 'pre_release',
     config = function()
       require("projections").setup({})
     end
@@ -106,10 +112,8 @@ return require('packer').startup(function(use)
     tag = '*', 
     config = function()
       require("toggleterm").setup {
-        autochdir = true, -- when neovim changes it current directory the terminal will change it's own when next it's opened
-        -- Change the default shell. Can be a string or a function returning a string
-        --shell = vim.o.shell,
-        shell = "powershell.exe",
+        autochdir = true,
+        shell = 'powershell.exe',
        }
     end
   }
@@ -119,22 +123,18 @@ return require('packer').startup(function(use)
     config = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("which-key").setup {}
     end
   }
   -- BufferLine
   use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
   -- Treesitter
   use {
-        'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+    end,
     }
   -- Surround
 use({
@@ -176,8 +176,16 @@ use {
     -- Uncomment next line if you want to follow only stable versions
     -- tag = "*"
 }
--- Glow
-use {"ellisonleao/glow.nvim", config = function() require("glow").setup() end}
--- Indent Lines
-use "lukas-reineke/indent-blankline.nvim"
+  -- Glow
+  use {
+    "ellisonleao/glow.nvim", 
+    config = function() 
+    require('glow').setup({
+      glow_path = "", -- will be filled automatically with your glow bin in $PATH, if any
+      install_path = vim.fn.stdpath("config")..'/bin/glow' , -- default path for installing glow binary
+    })
+    end
+  }
+  -- Indent Lines
+  use "lukas-reineke/indent-blankline.nvim"
 end)
