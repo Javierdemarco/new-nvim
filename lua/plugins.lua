@@ -2,13 +2,22 @@ return require('packer').startup(function(use)
   -- Packer
   use { "wbthomason/packer.nvim" }
   -- Icons
-  use 'nvim-tree/nvim-web-devicons'
-  -- Status line
+  use {'nvim-tree/nvim-web-devicons'}
+  -- Status and Winbar line
   use { 'freddiehaddad/feline.nvim',
     config = function()
       require('config.statusline').setup()
-      --require('feline').setup()
+      require('feline').winbar.setup()
+      require('feline').statuscolumn.setup()
     end
+  }
+  -- Winbar
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig",
+    config = function()
+      require('config.winbar').setup()    
+    end 
   }
   -- Colorscheme OneDark
   use {
@@ -23,19 +32,40 @@ return require('packer').startup(function(use)
   -- Lazygit inside vim
   use {
     'kdheepak/lazygit.nvim',
+    config = function()
+      vim.g.lazygit_use_custom_config_file_path = 1 -- config file path is evaluated if this value is 1
+      vim.g.lazygit_config_file_path = vim.fn.stdpath("config")..'/lua/config/lazygit.yaml' -- custom config file path
+    end
   }
   -- GitSigns in gutter
   use {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('gitsigns').setup()
+      require('config.gitsigns').setup()
     end
   }
-  -- Vscode extensions inside nvim
+  -- Mason
   use {
-    'neoclide/coc.nvim',
-    branch = 'release',
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = {"tsserver"},
+      })
+    end,
+    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
+  -- Nvim Lsp Config
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lspconfig').tsserver.setup{}
+    end
+  }
+  -- Conquering of Completion
+  use {'ms-jpq/coq_nvim', branch = 'coq'}
+  use {'ms-jpq/coq.artifacts', branch='artifacts'}
   -- Nvim Tree File Manager
   use {
     'nvim-tree/nvim-tree.lua',
