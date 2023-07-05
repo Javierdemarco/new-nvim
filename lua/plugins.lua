@@ -7,17 +7,16 @@ return require('packer').startup(function(use)
   use { 'freddiehaddad/feline.nvim',
     config = function()
       require('config.statusline').setup()
-      require('feline').winbar.setup()
-      require('feline').statuscolumn.setup()
+      -- require('feline').winbar.setup()
+      -- require('feline').statuscolumn.setup()
     end
   }
   -- Winbar
   -- use {
   --   "SmiteshP/nvim-navic",
-  --   requires = "neovim/nvim-lspconfig",
   --   config = function()
-  --     require('config.winbar').setup()    
-  --   end 
+  --     require('config.winbar').setup()
+  --   end
   -- }
   -- Colorscheme OneDark
   use {
@@ -33,8 +32,8 @@ return require('packer').startup(function(use)
   use {
     'kdheepak/lazygit.nvim',
     config = function()
-      vim.g.lazygit_use_custom_config_file_path = 1 
-      vim.g.lazygit_config_file_path = vim.fn.stdpath("config")..'/lua/config/lazygit.yaml' 
+      vim.g.lazygit_use_custom_config_file_path = 1
+      vim.g.lazygit_config_file_path = vim.fn.stdpath("config")..'/lua/config/lazygit.yaml'
     end
   }
   -- GitSigns in gutter
@@ -50,22 +49,21 @@ return require('packer').startup(function(use)
     config = function()
       require("mason").setup()
     end,
-    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
   }
   -- Mason Lsp Config
   use {
     "williamboman/mason-lspconfig.nvim",
+    requires = 'neovim/nvim-lspconfig',
+    after = {'mason.nvim'},
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {"tsserver"},
       })
-    end
-  }
-  -- Nvim Lsp Config
-  use {
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('lspconfig').tsserver.setup{}
+      require("mason-lspconfig").setup_handlers {
+        function (server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup {}
+        end,
+      }
     end
   }
   -- Conquering of Completion
@@ -108,8 +106,8 @@ return require('packer').startup(function(use)
   }
   -- Toggle Term 
   use {
-    "akinsho/toggleterm.nvim", 
-    tag = '*', 
+    "akinsho/toggleterm.nvim",
+    tag = '*',
     config = function()
       require("toggleterm").setup {
         autochdir = true,
